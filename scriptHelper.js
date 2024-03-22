@@ -5,11 +5,9 @@ require('cross-fetch/polyfill');
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
 // Here is the HTML formatting for our mission target div.
 
-let missionTarget = document.getElementById("miissionTarget");
-missionTarget.innerHTML =
-
-/*
-`<h2>Mission Destination</h2>
+let div= document.getElementById("missionTarget");
+div.innerHTML =`
+<h2>Mission Destination</h2>
 <ol>
 <li>Name: ${name} </li>
 <li>Diameter: ${diameter} </li>
@@ -17,38 +15,40 @@ missionTarget.innerHTML =
 <li>Distance from Earth: ${distance}</li>
 <li>Number of Moons: ${moons}</li>
 </ol>
- <img src="${imageUrl}">
-    */
+ <img src="${imageUrl}">`;
+    
 }
  
  function validateInput(testInput) {
+    let number = Number(testInput)
 if (testInput === ""){
     return "Empty";
-    } else if (isNaN(testInput)) {
-    return "Not a number"
-} else{
-return ("is a Number")
+    } else if (isNaN(number)) {
+    return "Not a Number"
+} else if (isNaN(number) === false){
+return ("Is a Number")
 }  
-};
+}
  
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel){
 let pilotStatus = document.getElementById('pilotStatus');
 let copilotStauts = document.getElementById('copilotStatus');
 let fuelStatus = document.getElementById('fuelStatus');
 let cargoStatus = document.getElementById('cargoStatus');
 let launchStatus = document.getElementById('launchStatus');
 
-let readyLaunch = true;
+let readyToLaunch = true;
 if (validateInput(pilot) === 'Empty' || validateInput(copilot) === 'Empty' || validateInput(fuelLevel) === 'Empty' || validateInput(cargoLevel) === 'Empty'){
 readyToLaunch = false;
 alert('All fields are required');   
-} 
+}
 
-if (validateInput(pilot) === 'Is a Number' || validateInput(copilot) === 'Is a Number' || validateInput(fuelLevel) === 'Is a Number' || validateInput(cargoLevel) === 'Is a Number')
+if (validateInput(pilot) === 'Is a Number' || validateInput(copilot) === 'Is a Number' || validateInput(fuelLevel) === 'Not a Number' || validateInput(cargoLevel) === 'Not a Number'){
  readyToLaunch = false
 
  alert("Please enter valid information for each field!");
- } else {
+ } 
+ else {
 pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
 copilotStauts.innerHTML = `Co-pilot ${copilot} is ready for launch`;
 
@@ -59,7 +59,7 @@ list.style.visibility = 'Visible';
 fuelStatus.innerHTML = "Fuel level too low for launch";
 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
 launchStatus.style.color = "red";
-readyLaunch = false;
+readyToLaunch = false;
 }
 
 if (cargoLevel <= 10000) { // Second: Condition for Cargo level
@@ -78,7 +78,7 @@ if (readyToLaunch) { // This mean rdyToLaunch = true;
 launchStatus.innerHTML = "Shuttle is Ready for Launch";
 launchStatus.style.color = "green"; //color changes to green
 }
-
+}
 
 async function myFetch() {
 let planetsReturned;
