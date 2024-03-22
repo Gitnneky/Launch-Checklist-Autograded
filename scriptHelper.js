@@ -40,11 +40,12 @@ let launchStatus = document.getElementById('launchStatus');
 let readyToLaunch = true;
 if (validateInput(pilot) === 'Empty' || validateInput(copilot) === 'Empty' || validateInput(fuelLevel) === 'Empty' || validateInput(cargoLevel) === 'Empty'){
 readyToLaunch = false;
+console.log("readyToLaunch")
 alert('All fields are required');   
 }
 
 if (validateInput(pilot) === 'Is a Number' || validateInput(copilot) === 'Is a Number' || validateInput(fuelLevel) === 'Not a Number' || validateInput(cargoLevel) === 'Not a Number'){
- readyToLaunch = false
+readyToLaunch = false
 
  alert("Please enter valid information for each field!");
  } 
@@ -74,7 +75,7 @@ readyToLaunch = false; //In this condition ready to launch will be false
 
 }
 
-if (readyToLaunch) { // This mean rdyToLaunch = true;
+if (readyToLaunch) { // This mean readyToLaunch = true;
 launchStatus.innerHTML = "Shuttle is Ready for Launch";
 launchStatus.style.color = "green"; //color changes to green
 }
